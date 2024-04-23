@@ -8,6 +8,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -31,6 +32,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'email_verified_at'
     ];
 
     /**
@@ -69,9 +71,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        $user = User::select('*')->join('model_has_roles', 'users.id', 'model_id')->where('role_id', 1)->get();
-        foreach ($user as $item) {
-            return ($this->email === $item->email) && $this->hasVerifiedEmail();
-        }
+        return Auth::user()->hasRole(['Super admin', 'Admin']);
     }
 }

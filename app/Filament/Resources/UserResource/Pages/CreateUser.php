@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
-use App\Models\ModelHasRoles;
+use App\Models\Role;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -26,8 +26,9 @@ class CreateUser extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
+        $role = Role::where('id', $data['role_id'])->first();
         $record = static::getModel()::create($data);
-        $record->assignRole('User');
+        $record->assignRole($role['name']);
 
         return $record;
     }

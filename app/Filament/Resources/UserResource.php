@@ -32,15 +32,15 @@ class UserResource extends Resource
 
     protected static ?string $navigationLabel = 'Account';
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
+    // public static function canCreate(): bool
+    // {
+    //     return false;
+    // }
 
-    public static function canEdit(Model $record): bool
-    {
-        return false;
-    }
+    // public static function canEdit(Model $record): bool
+    // {
+    //     return false;
+    // }
 
     public static function form(Form $form): Form
     {
