@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('details', function (Blueprint $table) {
+        Schema::create('galeries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('wedding_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['Akad', 'Resepsi', 'Ngunduh Mantu']);
-            $table->dateTime('date');
-            $table->text('address');
-            $table->text('maps');
-            $table->text('calendar');
+            $table->string('gallery1');
+            $table->string('gallery2');
+            $table->string('gallery3');
+            $table->string('gallery4');
+            $table->string('gallery5');
+            $table->string('gallery6');
+            $table->string('video');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('details');
+        Schema::dropIfExists('brides');
     }
 };

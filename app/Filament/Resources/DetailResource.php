@@ -42,6 +42,7 @@ class DetailResource extends Resource
                     DateTimePicker::make('date'),
                     TextInput::make('address')->required(),
                     TextInput::make('maps')->required(),
+                    TextInput::make('calendar')->required(),
                 ])
             ]);
     }
